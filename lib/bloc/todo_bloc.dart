@@ -6,9 +6,17 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-  TodoBloc() : super(TodoInitial()) {
-    on<TodoEvent>((event, emit) {
-      // TODO: implement event handler
+  TodoBloc() : super(TodoLoading()) {
+    on<TodoEventLoad>((event, emit) {                 //ketika eventload tersebut dipicu
+      emit(TodoLoaded(todos: [], selectedDate: null));    //bloc akan mengubah state -> todoloaded dengan daftar kosong & tanpa tanggal yang dipilh
     });
+
+    on<TodoSelectDate>((event, emit) {
+      final currentState = state;
+      if (currentState is TodoLoaded) {
+        emit(TodoLoaded(todos: currentState.todos, selectedDate: event.date));    //memilih tanggal
+      }
+    });
+    
   }
 }
