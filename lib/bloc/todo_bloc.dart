@@ -18,5 +18,15 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       }
     });
     
+    on<TodoEventAdd>((event, emit) {
+      final currentState = state;
+      if (currentState is TodoLoaded) {
+        final updatedTodos = List<TodoModel>.from(currentState.todos)     //addtodo baru maka akan masuk ke list
+          ..add(TodoModel(title: event.title, date: event.date));
+        emit(TodoLoaded(todos: updatedTodos, selectedDate: null));
+      }
+    });
+
+    
   }
 }
