@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:praktodobloc/bloc/todo_bloc.dart';
 
 class TodoPage extends StatelessWidget {
@@ -30,6 +31,24 @@ class TodoPage extends StatelessWidget {
                           }
                           return Text('No date selected');
                         },
+                      ),
+                      SizedBox(height: 16.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          ).then((selectedDate) {
+                            if (selectedDate != null) {
+                              context.read<TodoBloc>().add(
+                                TodoSelectDate(date: selectedDate),
+                              );
+                            }
+                          });
+                        },
+                        child: Text('Select Date'),
                       ),
                     ],
                   )
