@@ -9,7 +9,7 @@ class TodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _key = GlobalKey<FormState>();
-      final _controllertd = TextEditingController();
+    final _controllertd = TextEditingController();
 
     return Scaffold(
       body: SafeArea(
@@ -18,11 +18,16 @@ class TodoPage extends StatelessWidget {
           child: Column(
             children: [
               Text('Todo List'),
+              SizedBox(height: 16.0),
               Row(
                 children: [
                   Column(
                     children: [
-                      Text('Slected Date'),
+                      Text('Slected Date',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       BlocBuilder<TodoBloc, TodoState>(
                         builder: (context, state) {
                           if (state is TodoLoaded) {
@@ -37,6 +42,9 @@ class TodoPage extends StatelessWidget {
                       ),
                       SizedBox(height: 16.0),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 199, 207, 233)
+                         ),
                         onPressed: () {
                           showDatePicker(
                             context: context,
@@ -57,6 +65,7 @@ class TodoPage extends StatelessWidget {
                   )
                 ],
               ),
+              SizedBox(height: 10.0),
               Form(
                 key: _key,
                 child: Row(
@@ -75,7 +84,11 @@ class TodoPage extends StatelessWidget {
                         },
                       ),
                     ),
+                    SizedBox(width: 8.0),
                     FilledButton(
+                      style: FilledButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 5, 22, 127), // Ubah warna tombol menjadi biru
+                      ),
                       onPressed: () {
                         if (_key.currentState!.validate()) {
                           final selectedDate = context.read<TodoBloc>().state;
