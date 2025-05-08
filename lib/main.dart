@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:praktodobloc/bloc/todo_bloc.dart';
 import 'package:praktodobloc/presentation/todo_page.dart';
 
 void main() {
@@ -31,7 +33,10 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: TodoPage()
+      home: BlocProvider(
+        create: (context) => TodoBloc()..add(TodoEventLoad()),
+        child: TodoPage(),
+      )
     );
   }
 }
