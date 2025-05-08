@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-class TodoPage extends StatefulWidget {
+class TodoPage extends StatelessWidget {
   const TodoPage({super.key});
 
-  @override
-  State<TodoPage> createState() => _TodoPageState();
-}
 
-class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text('Todo List'),
+            ],
+          ),)),
+    );
   }
 }
